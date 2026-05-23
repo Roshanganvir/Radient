@@ -40,8 +40,8 @@ export class FalseFlooringComponent {
     this.meta.updateTag({ name: 'description', content: 'Anti-Static Laminated False Flooring by Radiant Engineers. Authorized USG Boral & Laban dealer.' });
     this.meta.updateTag({ property: 'og:title', content: 'False Flooring' });
   }
+private readonly productCategory = 'False Flooring';
 
-  private readonly productCategory = "men's clothing"; // replace with your actual API category
   private readonly apiService = inject(ApiService);
 
   productsResource = resource({

@@ -35,13 +35,14 @@ import { FooterComponent } from '../../components/footer/footer.component';
   `,
 })
 export class CeilingSystemsComponent {
+  private readonly productCategory = 'T-Grid System';
+
   constructor(private meta: Meta, private title: Title) {
     this.title.setTitle('Ceiling Systems — Radiant Engineers');
     this.meta.updateTag({ name: 'description', content: 'SS Lay-In, Clip-In, Metal Ceiling Systems by Radiant Engineers.' });
     this.meta.updateTag({ property: 'og:title', content: 'Ceiling Systems' });
   }
 
-  private readonly productCategory = "women's clothing"; // replace with your actual API category
   private readonly apiService = inject(ApiService);
 
   productsResource = resource({

@@ -3,20 +3,19 @@ import { ApiService } from '../../services/api.service';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { ProductCardSkeletonComponent } from '../../components/product-card-skeleton/product-card-skeleton.component';
 import { Meta, Title } from '@angular/platform-browser';
-import { FooterComponent } from '../../components/footer/footer.component';
 
 @Component({
   selector: 'app-home',
-  imports: [ProductCardComponent, ProductCardSkeletonComponent, FooterComponent],
+  imports: [ProductCardComponent, ProductCardSkeletonComponent],
   template: `
     <!-- Hero Banner -->
-    <div class="mt-36 bg-base-200 py-12 px-6 text-center">
+    <!-- <div class="mt-36 bg-base-200 py-12 px-6 text-center">
       <h1 class="text-3xl lg:text-5xl font-bold mb-3">Radiant Engineers</h1>
       <p class="text-gray-400 text-lg mb-1">Authorized Dealer — USG Boral & Laban</p>
       <p class="text-gray-500 text-sm">
         False Flooring • Ceiling Systems • Metal Ceilings • Acoustic Solutions
       </p>
-    </div>
+    </div> -->
 
     <!-- Products Grid -->
     <div class="mt-8 pb-10 px-6">
@@ -38,7 +37,6 @@ import { FooterComponent } from '../../components/footer/footer.component';
         </div>
       }
     </div>
-    <app-footer />
   `,
 })
 export class HomeComponent {

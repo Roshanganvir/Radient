@@ -10,13 +10,13 @@ import { FooterComponent } from '../../components/footer/footer.component';
   imports: [ProductCardComponent, ProductCardSkeletonComponent, FooterComponent],
   template: `
     <div class="mt-28 pb-10 px-6">
-      <div class="max-w-7xl mx-auto mb-6">
+      <!-- <div class="max-w-7xl mx-auto mb-6">
         <h2 class="text-xl font-semibold">Metal Ceilings</h2>
         <p class="text-sm text-gray-400">
           Expanded Metal Mesh, Open Cell, Baffle, Linear 84C, Linear 84R,
           Sun Louver systems. GI/Aluminium, powder coated finish.
         </p>
-      </div>
+      </div> -->
       @if (isLoading()) {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mx-auto max-w-7xl gap-6">
           @for (item of [1,2,3,4]; track item) {
@@ -41,7 +41,7 @@ export class MetalCeilingsComponent {
     this.meta.updateTag({ property: 'og:title', content: 'Metal Ceilings' });
   }
 
-  private readonly productCategory = 'jewelery'; // replace with your actual API category
+private readonly productCategory = 'Metal Ceiling';
   private readonly apiService = inject(ApiService);
 
   productsResource = resource({

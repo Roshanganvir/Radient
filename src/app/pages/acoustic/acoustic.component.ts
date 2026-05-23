@@ -5,6 +5,7 @@ import { ProductCardSkeletonComponent } from '../../components/product-card-skel
 import { Meta, Title } from '@angular/platform-browser';
 import { FooterComponent } from '../../components/footer/footer.component';
 
+
 @Component({
   selector: 'app-acoustic',
   imports: [ProductCardComponent, ProductCardSkeletonComponent, FooterComponent],
@@ -34,13 +35,14 @@ import { FooterComponent } from '../../components/footer/footer.component';
   `,
 })
 export class AcousticComponent {
+    private readonly productCategory = 'Acoustic Ceiling'; // 👈 bas yahi change karo
+
   constructor(private meta: Meta, private title: Title) {
     this.title.setTitle('Acoustic Solutions — Radiant Engineers');
     this.meta.updateTag({ name: 'description', content: 'Mineral Fibre, Gypsum, PET Acoustic Boards and T-Grid Systems by Radiant Engineers.' });
     this.meta.updateTag({ property: 'og:title', content: 'Acoustic Solutions' });
   }
 
-  private readonly productCategory = 'electronics'; // replace with your actual API category
   private readonly apiService = inject(ApiService);
 
 

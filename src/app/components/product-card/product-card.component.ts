@@ -1,10 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Product } from '../../../type';
-import {
-  faEye,
-  faHeart,
-  faCartShopping,
-} from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShoppingCartLocalStorageService } from '../../services/shopping-cart-local-storage.service';
 import { Router } from '@angular/router';
@@ -15,60 +11,68 @@ import { FavoriteItemsLocalStorageService } from '../../services/favorite-items-
   imports: [FontAwesomeModule],
   template: `
     <div
-      class="card hover:bg-base-200 transition-all bg-base-100 w-full h-full shadow-sm"
+      (click)="onClickNavigate()"
+      class="border border-gray-200 rounded-lg overflow-hidden cursor-pointer
+             hover:shadow-md transition-shadow bg-white h-full flex flex-col"
     >
-      <figure>
+      <!-- Image -->
+      <div class="w-full h-[200px] overflow-hidden border-b border-gray-100">
         <img
-          class="w-full h-[320px] object-fill"
+          class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
           [src]="product()?.image"
-          alt="Shoes"
+          [alt]="product()?.title"
         />
-      </figure>
-      <div class="card-body">
-        <h2 class="card-title">
+      </div>
+
+      <!-- Body -->
+      <div class="flex flex-col flex-1 p-4">
+
+        <!-- Category badge -->
+        <span class="text-xs text-gray-400 uppercase tracking-wide mb-1">
+          {{ product()?.category }}
+        </span>
+
+        <!-- Title -->
+        <h2 class="font-semibold text-gray-800 text-sm leading-snug mb-2 line-clamp-2">
           {{ product()?.title }}
         </h2>
-        <h3 class="text-lg text-green-500">$ {{ product()?.price }}</h3>
 
-        <p class="line-clamp-3">
-          {{ product()?.description }}
-        </p>
-        <div class="card-actions mt-4 w-full">
-          <div class="flex items-center gap-x-2 w-full justify-between">
-            <div class="flex items-center gap-x-2">
-              <div class="tooltip" data-tip="View Detail">
-                <button (click)="onClickNavigate()" class="btn btn-soft btn-sm">
-                  <fa-icon [icon]="faEye"></fa-icon>
-                </button>
-              </div>
-              <div class="tooltip" data-tip="Favorite">
-                <button
-                  (click)="toggleFavoriteItem()"
-                  [class]="
-                    checkFavoriteItemAlreadyExist()
-                      ? 'btn btn-soft btn-primary btn-sm'
-                      : 'btn btn-soft btn-sm'
-                  "
-                >
-                  <fa-icon [icon]="faHeart"></fa-icon>
-                </button>
-              </div>
-            </div>
-            <div>
-              <div class="badge badge-outline capitalize">
-                {{ product()?.category }}
-              </div>
-            </div>
-          </div>
+        <!-- Sub items (description lines) -->
+        <div class="flex-1 border-t border-gray-100 pt-2 space-y-1">
+          @for (line of descriptionLines(); track line) {
+            <p class="text-xs text-gray-500 border-b border-dashed border-gray-200 pb-1 line-clamp-1">
+              {{ line }}
+            </p>
+          }
+        </div>
+
+        <!-- Price + Actions row -->
+        <div class="mt-3 flex items-center justify-between">
+          <span class="text-green-600 font-semibold text-sm">
+            Rs {{ product()?.price }}
+          </span>
+
+          <!-- Favorite -->
           <button
-            [disabled]="checkItemAlreadyExist()"
-            (click)="addItem()"
-            class="mt-2 w-full btn btn-primary"
+            (click)="$event.stopPropagation(); toggleFavoriteItem()"
+            [class]="checkFavoriteItemAlreadyExist()
+              ? 'text-indigo-600'
+              : 'text-gray-300 hover:text-indigo-400'"
+            class="text-lg transition-colors"
           >
-            <fa-icon [icon]="faCartShopping"></fa-icon>
-            Add to Cart
+            <fa-icon [icon]="faHeart"></fa-icon>
           </button>
         </div>
+
+        <!-- View All button -->
+        <button
+          (click)="$event.stopPropagation(); onClickNavigate()"
+          class="mt-3 w-full border border-indigo-600 text-indigo-600 text-xs
+                 py-1.5 rounded hover:bg-indigo-50 transition-colors"
+        >
+          + View All
+        </button>
+
       </div>
     </div>
   `,
@@ -83,23 +87,28 @@ export class ProductCardComponent {
   private readonly router = inject(Router);
 
   faHeart = faHeart;
-  faEye = faEye;
-  faCartShopping = faCartShopping;
   product = input<Product>();
 
   cartItems = computed(() => this.shoppingCartLocalStorageService.cartItems());
 
-  addItem() {
-    this.shoppingCartLocalStorageService.addItem({
-      ...this?.product()!,
-      quantity: 1, // Add default quantity
-    });
-  }
+  // Split description into 3 bullet lines
+  descriptionLines = computed(() => {
+    const desc = this.product()?.description ?? '';
+    const sentences = desc.match(/[^.!?]+[.!?]*/g) ?? [desc];
+    return sentences.slice(0, 3).map(s => s.trim()).filter(Boolean);
+  });
 
   checkItemAlreadyExist() {
     return this.shoppingCartLocalStorageService.checkItemAlreadyExist(
       this.product()?.id!
     );
+  }
+
+  addItem() {
+    this.shoppingCartLocalStorageService.addItem({
+      ...this?.product()!,
+      quantity: 1,
+    });
   }
 
   checkFavoriteItemAlreadyExist() {
