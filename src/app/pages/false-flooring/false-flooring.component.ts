@@ -7,7 +7,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 
 @Component({
   selector: 'app-false-flooring',
-  imports: [ProductCardComponent, ProductCardSkeletonComponent, FooterComponent],
+  imports: [ProductCardComponent, ProductCardSkeletonComponent],
   template: `
     <div class="mt-28 pb-10 px-6">
       <div class="max-w-7xl mx-auto mb-6">
@@ -31,7 +31,6 @@ import { FooterComponent } from '../../components/footer/footer.component';
         </div>
       }
     </div>
-    <app-footer />
   `,
 })
 export class FalseFlooringComponent {

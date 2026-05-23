@@ -47,7 +47,7 @@ import { Meta, Title } from '@angular/platform-browser';
             >
           </fieldset>
           <!-- Payment Method -->
-          <fieldset class="mt-1 fieldset px-0 p-4">
+          <!-- <fieldset class="mt-1 fieldset px-0 p-4">
             <legend class="fieldset-legend text-lg uppercase">
               Payment Method
             </legend>
@@ -100,7 +100,7 @@ import { Meta, Title } from '@angular/platform-browser';
                 />
               </div>
             </div>
-          </fieldset>
+          </fieldset> -->
           <div class="w-full flex items-center justify-between gap-x-3">
             <label class="fieldset-label">
               <input

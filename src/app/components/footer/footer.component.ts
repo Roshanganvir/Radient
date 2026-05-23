@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
           <h2 class="text-xl font-semibold">Radiant Engineers</h2>
           <div>
             <p class="text-sm opacity-70">CONTACT PERSON</p>
-            <p class="font-semibold">Mr. Roshan Ganvir</p>
+            <p class="font-semibold">Mr.Anshul Soni</p>
           </div>
           <div>
             <p class="text-sm opacity-70">ADDRESS</p>

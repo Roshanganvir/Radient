@@ -28,8 +28,8 @@ import { FooterComponent } from '../../components/footer/footer.component';
   imports: [
     FontAwesomeModule,
     ProductCardComponent,
-    ProductCardSkeletonComponent,
-    FooterComponent,
+    ProductCardSkeletonComponent
+    
   ],
   template: `
     <div class="min-h-full">
@@ -137,7 +137,6 @@ import { FooterComponent } from '../../components/footer/footer.component';
         </div>
       </div>
     </div>
-    <app-footer />
   `,
   styles: ``,
 })

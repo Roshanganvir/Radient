@@ -6,7 +6,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 
 @Component({
   selector: 'app-favorite-items',
-  imports: [ProductCardComponent, FooterComponent],
+  imports: [ProductCardComponent],
   template: `
     <div class="mt-28 pb-10 max-w-7xl px-6 mx-auto">
       <h2 class="text-xl font-bold uppercase">Your Favorite Items</h2>
@@ -23,7 +23,6 @@ import { FooterComponent } from '../../components/footer/footer.component';
       <p class="text-lg text-center mt-10">No favorite item</p>
       }
     </div>
-    <app-footer />
   `,
   styles: ``,
 })
