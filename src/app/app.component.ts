@@ -25,7 +25,8 @@ import { themeChange } from 'theme-change';
     </main>
 
     <!-- WhatsApp Floating Button -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+    <!-- Desktop: bottom-6 right-6 | Mobile: bottom-20 right-4 (above bottom nav) -->
+    <div class="fixed bottom-20 right-4 lg:bottom-6 lg:right-6 z-50 flex flex-col items-end gap-2">
 
       <!-- Chat Now Popup -->
       @if (showPopup) {
@@ -66,7 +67,7 @@ export class AppComponent implements OnInit {
     const msg = encodeURIComponent(
       'Hello, we would like to know more about the Products and Service of Radiant Engineers Solution'
     );
-window.open(`https://wa.me/917350930357?text=${msg}`, '_blank');
+    window.open(`https://wa.me/917350930357?text=${msg}`, '_blank');
   }
 
   ngOnInit(): void {
