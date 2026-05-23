@@ -1,7 +1,16 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPhone, faEnvelope, faMapMarkerAlt, faCheckCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPhone,
+  faEnvelope,
+  faMapMarkerAlt,
+  faCheckCircle,
+  faSearch,
+  faHome,
+  faUser,
+  faTh,
+} from '@fortawesome/free-solid-svg-icons';
 import { ShoppingCartLocalStorageService } from '../../services/shopping-cart-local-storage.service';
 
 @Component({
@@ -34,7 +43,7 @@ import { ShoppingCartLocalStorageService } from '../../services/shopping-cart-lo
             </div>
           </div>
 
-          <!-- Center: Nav Links -->
+          <!-- Center: Nav Links (Desktop only) -->
           <nav class="hidden lg:flex items-center gap-x-1">
             <a routerLink="/" routerLinkActive="bg-primary text-white" [routerLinkActiveOptions]="{ exact: true }"
               class="px-5 py-2 font-semibold text-sm hover:bg-primary hover:text-white transition-all">
@@ -50,7 +59,7 @@ import { ShoppingCartLocalStorageService } from '../../services/shopping-cart-lo
             </a>
           </nav>
 
-          <!-- Right: Call + Enquiry Buttons -->
+          <!-- Right: Call + Enquiry Buttons (Desktop only) -->
           <div class="hidden lg:flex flex-col gap-y-2">
             <a href="tel:8669148239"
               class="btn btn-outline btn-sm border-primary text-primary hover:bg-primary hover:text-white flex items-center gap-x-2">
@@ -73,7 +82,7 @@ import { ShoppingCartLocalStorageService } from '../../services/shopping-cart-lo
         </div>
       </div>
 
-      <!-- Bottom Nav Bar: Our Range -->
+      <!-- Bottom Nav Bar: Our Range (Desktop) -->
       <div class="bg-base-100 border-b border-base-300">
         <div class="max-w-7xl mx-auto px-4 flex items-center gap-x-4 py-2 overflow-x-auto">
           <span class="text-primary font-bold text-sm whitespace-nowrap">OUR RANGE</span>
@@ -99,28 +108,61 @@ import { ShoppingCartLocalStorageService } from '../../services/shopping-cart-lo
         </div>
       </div>
 
-      <!-- Mobile Menu -->
-      <div class="block lg:hidden border-t border-base-300 px-4 py-2 flex items-center justify-between">
-        <div class="dropdown">
-          <div tabindex="0" role="button" class="btn btn-sm btn-ghost">☰ Menu</div>
-          <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow">
-            <li><a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-primary">All Products</a></li>
-            <li><a routerLink="/false-flooring" routerLinkActive="text-primary" [routerLinkActiveOptions]="{ exact: true }">False Flooring</a></li>
-            <li><a routerLink="/ceiling-systems" routerLinkActive="text-primary" [routerLinkActiveOptions]="{ exact: true }">Ceiling Systems</a></li>
-            <li><a routerLink="/metal-ceilings" routerLinkActive="text-primary" [routerLinkActiveOptions]="{ exact: true }">Metal Ceilings</a></li>
-            <li><a routerLink="/acoustic" routerLinkActive="text-primary" [routerLinkActiveOptions]="{ exact: true }">Acoustic</a></li>
-            <li><a routerLink="/favorite-items" routerLinkActive="text-primary" [routerLinkActiveOptions]="{ exact: true }">Saved Items</a></li>
-            <li><a routerLink="/enquiry-cart" routerLinkActive="text-primary" [routerLinkActiveOptions]="{ exact: true }">Send Enquiry</a></li>
-          </ul>
-        </div>
-        <a href="tel:8669148239" class="btn btn-primary btn-sm">
-          <fa-icon [icon]="faPhone"></fa-icon> Call Us
-        </a>
-      </div>
-
     </header>
+
+    <!-- Mobile Bottom Navigation Bar (Fixed) -->
+    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-base-100 border-t border-base-300 flex lg:hidden shadow-[0_-2px_8px_rgba(0,0,0,0.08)]">
+
+      <!-- Home -->
+      <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-primary"
+        class="flex flex-col items-center justify-center flex-1 py-2 text-gray-500 hover:text-primary transition-all">
+        <fa-icon [icon]="faHome" class="text-lg"></fa-icon>
+        <span class="text-[10px] mt-0.5 font-medium">Home</span>
+      </a>
+
+      <!-- Profile -->
+      <a routerLink="/about" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-primary"
+        class="flex flex-col items-center justify-center flex-1 py-2 text-gray-500 hover:text-primary transition-all">
+        <fa-icon [icon]="faUser" class="text-lg"></fa-icon>
+        <span class="text-[10px] mt-0.5 font-medium">Profile</span>
+      </a>
+
+      <!-- Our Range -->
+      <a routerLink="/false-flooring" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-primary"
+        class="flex flex-col items-center justify-center flex-1 py-2 text-gray-500 hover:text-primary transition-all">
+        <fa-icon [icon]="faTh" class="text-lg"></fa-icon>
+        <span class="text-[10px] mt-0.5 font-medium">Our Range</span>
+      </a>
+
+      <!-- Contact Us -->
+      <a routerLink="/enquiry-cart" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-primary"
+        class="flex flex-col items-center justify-center flex-1 py-2 text-gray-500 hover:text-primary transition-all">
+        <fa-icon [icon]="faEnvelope" class="text-lg"></fa-icon>
+        <span class="text-[10px] mt-0.5 font-medium">Contact Us</span>
+        @if (cartItemQuantity() >= 1) {
+          <span class="absolute top-1.5 badge badge-warning badge-xs">{{ cartItemQuantity() }}</span>
+        }
+      </a>
+
+      <!-- Call Us -->
+      <a href="tel:8669148239"
+        class="flex flex-col items-center justify-center flex-1 py-2 text-gray-500 hover:text-primary transition-all">
+        <fa-icon [icon]="faPhone" class="text-lg"></fa-icon>
+        <span class="text-[10px] mt-0.5 font-medium">Call Us</span>
+      </a>
+
+    </nav>
+
+    <!-- Spacer: prevents content from hiding behind bottom nav on mobile -->
+    <div class="block lg:hidden h-16"></div>
   `,
-  styles: ``,
+  styles: `
+    /* Active state color for bottom nav icons */
+    nav a.text-primary fa-icon,
+    nav a.text-primary span {
+      color: inherit;
+    }
+  `,
 })
 export class HeaderComponent {
   private readonly shoppingCartLocalStorageService = inject(ShoppingCartLocalStorageService);
@@ -130,6 +172,9 @@ export class HeaderComponent {
   faMapMarkerAlt = faMapMarkerAlt;
   faCheckCircle = faCheckCircle;
   faSearch = faSearch;
+  faHome = faHome;
+  faUser = faUser;
+  faTh = faTh;
 
   cartItemQuantity = computed(() => this.shoppingCartLocalStorageService.cartItemQuantity());
 }
