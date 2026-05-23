@@ -27,10 +27,10 @@ import { Meta, Title } from '@angular/platform-browser';
   template: `
     <div class="mx-auto flex flex-col-reverse lg:flex-row gap-x-20 min-h-full">
       <div class="w-full py-14 lg:py-0 lg:pb-0 lg:pt-28 px-6 lg:pl-24 lg:pr-8">
-        <h2 class="text-xl font-bold uppercase">Payment Detail</h2>
-        <p>
+        <!-- <h2 class="text-xl font-bold uppercase">Payment Detail</h2> -->
+        <!-- <p>
           Complete your purchase item by providing your payment details order
-        </p>
+        </p> -->
         <form (submit)="simulateCheckoutProcessing($event)">
           <!-- Shipping Address -->
           <fieldset class="mt-4 fieldset px-0 p-4">
@@ -132,12 +132,12 @@ import { Meta, Title } from '@angular/platform-browser';
               <span class="text-lg font-bold">{{ totalPrice() }}</span>
             </div>
           </div>
-          <button class="btn btn-primary w-full mt-2" type="submit">
+          <!-- <button class="btn btn-primary w-full mt-2" type="submit">
             @if (!isLoading() && !isSuccess()) { Pay $
             {{ totalPrice() }}
             } @else if (!isLoading() && isSuccess()) { Checkout success } @else
             { Processing your payment... }
-          </button>
+          </button> -->
           }
         </form>
       </div>

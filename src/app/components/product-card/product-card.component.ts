@@ -70,7 +70,7 @@ import { FavoriteItemsLocalStorageService } from '../../services/favorite-items-
           class="mt-3 w-full border border-indigo-600 text-indigo-600 text-xs
                  py-1.5 rounded hover:bg-indigo-50 transition-colors"
         >
-          + View All
+          + Get Product Details
         </button>
 
       </div>

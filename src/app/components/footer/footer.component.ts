@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <footer>
 
@@ -28,9 +29,46 @@ import { CommonModule } from '@angular/common';
 
         <div class="bg-gray-100 p-8">
           <h2 class="text-xl font-semibold mb-4">CONTACT US</h2>
-          <textarea class="w-full border p-3 mb-4 rounded" rows="4"
-            placeholder="Describe your requirement"></textarea>
-          <button class="bg-indigo-600 text-white px-6 py-2 rounded">Submit</button>
+
+          <!-- Name Field -->
+          <input
+            [(ngModel)]="contactName"
+            type="text"
+            class="w-full border p-3 mb-3 rounded"
+            placeholder="Your Name"
+          />
+
+          <!-- Phone Field -->
+          <input
+            [(ngModel)]="contactPhone"
+            type="tel"
+            class="w-full border p-3 mb-3 rounded"
+            placeholder="Your Phone Number"
+          />
+
+          <!-- Message Field -->
+          <textarea
+            [(ngModel)]="contactMessage"
+            class="w-full border p-3 mb-4 rounded"
+            rows="4"
+            placeholder="Describe your requirement"
+          ></textarea>
+
+          <!-- Validation Error -->
+          @if (showError) {
+            <p class="text-red-500 text-sm mb-3">⚠️ Please enter your requirement before submitting.</p>
+          }
+
+          <!-- Submit Button -->
+          <button
+            (click)="submitToWhatsApp()"
+            class="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition-all flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.563 4.14 1.541 5.878L.057 23.943l6.244-1.467A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.925 0-3.722-.511-5.271-1.402l-.371-.221-3.878.91.961-3.768-.242-.389A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+            </svg>
+            Submit via WhatsApp
+          </button>
         </div>
       </div>
 
@@ -153,6 +191,40 @@ export class FooterComponent {
 
   year = new Date().getFullYear();
   showAll = false;
+  showError = false;
+
+  // Contact form fields
+  contactName = '';
+  contactPhone = '';
+  contactMessage = '';
+
+  submitToWhatsApp() {
+    // Validation: message required
+    if (!this.contactMessage.trim()) {
+      this.showError = true;
+      return;
+    }
+    this.showError = false;
+
+    // Build WhatsApp message with all form data
+    let msg = `*New Enquiry - Radiant Engineers*\n\n`;
+
+    if (this.contactName.trim()) {
+      msg += `*Name:* ${this.contactName.trim()}\n`;
+    }
+    if (this.contactPhone.trim()) {
+      msg += `*Phone:* ${this.contactPhone.trim()}\n`;
+    }
+    msg += `\n*Requirement:*\n${this.contactMessage.trim()}`;
+
+    const encodedMsg = encodeURIComponent(msg);
+    window.open(`https://wa.me/917350930357?text=${encodedMsg}`, '_blank');
+
+    // Clear form after submit
+    this.contactName = '';
+    this.contactPhone = '';
+    this.contactMessage = '';
+  }
 
   starBars = [
     { label: '5★', pct: 66 },

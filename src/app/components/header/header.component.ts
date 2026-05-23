@@ -64,19 +64,19 @@ import { ShoppingCartLocalStorageService } from '../../services/shopping-cart-lo
             <a href="tel:8669148239"
               class="btn btn-outline btn-sm border-primary text-primary hover:bg-primary hover:text-white flex items-center gap-x-2">
               <fa-icon [icon]="faPhone"></fa-icon>
-              <div class="text-left">
+              <!-- <div class="text-left">
                 <div class="text-xs font-bold">Call 8669148239</div>
                 <div class="text-xs opacity-70">Pune & Nagpur</div>
-              </div>
+              </div> -->
             </a>
-            <a routerLink="/enquiry-cart"
+            <!-- <a routerLink="/enquiry-cart"
               class="btn btn-primary btn-sm flex items-center gap-x-2">
               <fa-icon [icon]="faEnvelope"></fa-icon>
               Send Enquiry
               @if (cartItemQuantity() >= 1) {
                 <div class="badge badge-warning badge-sm">{{ cartItemQuantity() }}</div>
               }
-            </a>
+            </a> -->
           </div>
 
         </div>
