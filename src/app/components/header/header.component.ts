@@ -121,11 +121,11 @@ import { ShoppingCartLocalStorageService } from '../../services/shopping-cart-lo
       </a>
 
       <!-- Profile -->
-      <a routerLink="/about" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-primary"
+      <!-- <a routerLink="/about" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-primary"
         class="flex flex-col items-center justify-center flex-1 py-2 text-gray-500 hover:text-primary transition-all">
         <fa-icon [icon]="faUser" class="text-lg"></fa-icon>
         <span class="text-[10px] mt-0.5 font-medium">Profile</span>
-      </a>
+      </a> -->
 
       <!-- Our Range -->
       <a routerLink="/false-flooring" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-primary"
