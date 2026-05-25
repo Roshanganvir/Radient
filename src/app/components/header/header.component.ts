@@ -12,161 +12,251 @@ import {
   faTh,
 } from '@fortawesome/free-solid-svg-icons';
 import { ShoppingCartLocalStorageService } from '../../services/shopping-cart-local-storage.service';
-
+ 
 @Component({
   selector: 'app-header',
   imports: [FontAwesomeModule, RouterLink, RouterLinkActive],
   template: `
-    <header class="w-full top-0 fixed z-50 bg-base-100 shadow-md">
-
-      <!-- Top Bar -->
-      <div class="border-b border-base-300">
-        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between py-3">
-
-          <!-- Left: Logo + Company Info -->
-          <div class="flex items-center gap-x-4">
-            <img
-              src="assets/radiant-logo.png"
-              alt="Radiant Engineers Logo"
-              class="h-14 w-14 object-contain"
-            />
+    <header class="w-full top-0 fixed z-50" style="background: var(--navy);">
+ 
+      <!-- Gold top accent bar -->
+      <div style="height:3px; background: var(--gold);"></div>
+ 
+      <!-- ── MAIN NAVBAR ── -->
+      <div style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between" style="height: 72px;">
+ 
+          <!-- Logo + Company -->
+          <div class="flex items-center gap-4">
+            <div style="padding:3px; border-radius:50%; border:2px solid var(--gold); display:flex; align-items:center; justify-content:center;">
+              <img
+                src="assets/radiant-logo.png"
+                alt="Radiant Engineers"
+                style="height:48px; width:48px; object-fit:contain; border-radius:50%;"
+              />
+            </div>
             <div>
-              <h1 class="text-xl font-bold">Radiant Engineers</h1>
-              <p class="text-xs text-gray-500 flex items-center gap-x-1">
-                <fa-icon [icon]="faMapMarkerAlt" class="text-gray-400"></fa-icon>
-                Pune & Nagpur, Maharashtra
+              <h1 style="color:#fff; font-size:1.2rem; font-weight:700; letter-spacing:0.5px; line-height:1.2;">
+                Radiant Engineers
+              </h1>
+              <p style="color:rgba(255,255,255,0.5); font-size:0.7rem; margin-top:2px; display:flex; align-items:center; gap:4px;">
+                <fa-icon [icon]="faMapMarkerAlt" style="font-size:10px;"></fa-icon>
+                Pune &amp; Nagpur, Maharashtra
               </p>
-              <p class="text-xs text-gray-500 flex items-center gap-x-1">
-                <fa-icon [icon]="faCheckCircle" class="text-green-500"></fa-icon>
+              <p style="color:rgba(255,255,255,0.5); font-size:0.7rem; margin-top:1px; display:flex; align-items:center; gap:4px;">
+                <fa-icon [icon]="faCheckCircle" style="color:#4ade80; font-size:10px;"></fa-icon>
                 GST No. 27CWTPS1346A1ZC
               </p>
             </div>
           </div>
-
-          <!-- Center: Nav Links (Desktop only) -->
-          <nav class="hidden lg:flex items-center gap-x-1">
-            <a routerLink="/" routerLinkActive="bg-primary text-white" [routerLinkActiveOptions]="{ exact: true }"
-              class="px-5 py-2 font-semibold text-sm hover:bg-primary hover:text-white transition-all">
-              HOME
-            </a>
-            <a routerLink="/about" routerLinkActive="bg-primary text-white" [routerLinkActiveOptions]="{ exact: true }"
-              class="px-5 py-2 font-semibold text-sm hover:bg-primary hover:text-white transition-all">
-              ABOUT US
-            </a>
-            <a routerLink="/enquiry-cart" routerLinkActive="bg-primary text-white" [routerLinkActiveOptions]="{ exact: true }"
-              class="px-5 py-2 font-semibold text-sm hover:bg-primary hover:text-white transition-all">
-              CONTACT US
-            </a>
+ 
+          <!-- Desktop Nav Links -->
+          <nav class="hidden lg:flex items-center gap-1">
+            <a routerLink="/" routerLinkActive="nav-active"
+               [routerLinkActiveOptions]="{ exact: true }"
+               class="nav-link">HOME</a>
+            <a routerLink="/about" routerLinkActive="nav-active"
+               [routerLinkActiveOptions]="{ exact: true }"
+               class="nav-link">ABOUT US</a>
+            <a routerLink="/enquiry-cart" routerLinkActive="nav-active"
+               [routerLinkActiveOptions]="{ exact: true }"
+               class="nav-link">CONTACT US</a>
           </nav>
-
-          <!-- Right: Call + Enquiry Buttons (Desktop only) -->
-          <div class="hidden lg:flex flex-col gap-y-2">
-            <a href="tel:8669148239"
-              class="btn btn-outline btn-sm border-primary text-primary hover:bg-primary hover:text-white flex items-center gap-x-2">
-              <fa-icon [icon]="faPhone"></fa-icon>
-              <!-- <div class="text-left">
-                <div class="text-xs font-bold">Call 8669148239</div>
-                <div class="text-xs opacity-70">Pune & Nagpur</div>
-              </div> -->
+ 
+          <!-- Call Button -->
+          <div class="hidden lg:block">
+            <a href="tel:8669148239" class="call-btn">
+              <fa-icon [icon]="faPhone" style="font-size:13px;"></fa-icon>
+              Call Us
             </a>
-            <!-- <a routerLink="/enquiry-cart"
-              class="btn btn-primary btn-sm flex items-center gap-x-2">
-              <fa-icon [icon]="faEnvelope"></fa-icon>
-              Send Enquiry
-              @if (cartItemQuantity() >= 1) {
-                <div class="badge badge-warning badge-sm">{{ cartItemQuantity() }}</div>
-              }
-            </a> -->
           </div>
-
+ 
         </div>
       </div>
-
-      <!-- Bottom Nav Bar: Our Range (Desktop) -->
-      <div class="bg-base-100 border-b border-base-300">
-        <div class="max-w-7xl mx-auto px-4 flex items-center gap-x-4 py-2 overflow-x-auto">
-          <span class="text-primary font-bold text-sm whitespace-nowrap">OUR RANGE</span>
-          <span class="text-gray-400">|</span>
-          <a routerLink="/" routerLinkActive="text-primary font-semibold" [routerLinkActiveOptions]="{ exact: true }"
-            class="text-sm whitespace-nowrap hover:text-primary transition-all">All Products</a>
-          <a routerLink="/false-flooring" routerLinkActive="text-primary font-semibold" [routerLinkActiveOptions]="{ exact: true }"
-            class="text-sm whitespace-nowrap hover:text-primary transition-all">False Flooring</a>
-          <a routerLink="/ceiling-systems" routerLinkActive="text-primary font-semibold" [routerLinkActiveOptions]="{ exact: true }"
-            class="text-sm whitespace-nowrap hover:text-primary transition-all">Ceiling Systems</a>
-          <a routerLink="/metal-ceilings" routerLinkActive="text-primary font-semibold" [routerLinkActiveOptions]="{ exact: true }"
-            class="text-sm whitespace-nowrap hover:text-primary transition-all">Metal Ceilings</a>
-          <a routerLink="/acoustic" routerLinkActive="text-primary font-semibold" [routerLinkActiveOptions]="{ exact: true }"
-            class="text-sm whitespace-nowrap hover:text-primary transition-all">Acoustic Panel</a>
-          <a routerLink="/favorite-items" routerLinkActive="text-primary font-semibold" [routerLinkActiveOptions]="{ exact: true }"
-            class="text-sm whitespace-nowrap hover:text-primary transition-all">Saved Items</a>
-
-          <!-- Search Box -->
-          <div class="ml-auto flex items-center border border-base-300 rounded px-2 py-1 gap-x-2 min-w-[180px]">
-            <input type="text" placeholder="Search Products/Services" class="text-xs outline-none bg-transparent w-full" />
-            <fa-icon [icon]="faSearch" class="text-gray-400 text-xs"></fa-icon>
+ 
+      <!-- ── OUR RANGE BAR ── -->
+      <div style="background: var(--navy-dark); border-bottom: 1px solid rgba(255,255,255,0.06);">
+        <div class="max-w-7xl mx-auto px-6 flex items-center gap-2 overflow-x-auto" style="height:44px;">
+ 
+          <span style="color: var(--gold); font-size:0.75rem; font-weight:700; letter-spacing:0.12em; white-space:nowrap;">
+            OUR RANGE
+          </span>
+          <span style="color:rgba(255,255,255,0.2); margin:0 4px;">|</span>
+ 
+          <a routerLink="/" routerLinkActive="range-active"
+             [routerLinkActiveOptions]="{ exact: true }" class="range-link">All Products</a>
+          <a routerLink="/false-flooring" routerLinkActive="range-active"
+             [routerLinkActiveOptions]="{ exact: true }" class="range-link">False Flooring</a>
+          <a routerLink="/ceiling-systems" routerLinkActive="range-active"
+             [routerLinkActiveOptions]="{ exact: true }" class="range-link">Ceiling Systems</a>
+          <a routerLink="/metal-ceilings" routerLinkActive="range-active"
+             [routerLinkActiveOptions]="{ exact: true }" class="range-link">Metal Ceilings</a>
+          <a routerLink="/acoustic" routerLinkActive="range-active"
+             [routerLinkActiveOptions]="{ exact: true }" class="range-link">Acoustic Panel</a>
+          <a routerLink="/favorite-items" routerLinkActive="range-active"
+             [routerLinkActiveOptions]="{ exact: true }" class="range-link">Saved Items</a>
+ 
+          <!-- Search -->
+          <div class="ml-auto flex items-center gap-2 search-box">
+            <fa-icon [icon]="faSearch" style="color:rgba(255,255,255,0.35); font-size:11px;"></fa-icon>
+            <input
+              type="text"
+              placeholder="Search Products/Services"
+              class="search-input"
+            />
           </div>
+ 
         </div>
       </div>
-
+ 
     </header>
-
-    <!-- Mobile Bottom Navigation Bar (Fixed) -->
-    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-base-100 border-t border-base-300 flex lg:hidden shadow-[0_-2px_8px_rgba(0,0,0,0.08)]">
-
-      <!-- Home -->
-      <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-primary"
-        class="flex flex-col items-center justify-center flex-1 py-2 text-gray-500 hover:text-primary transition-all">
-        <fa-icon [icon]="faHome" class="text-lg"></fa-icon>
-        <span class="text-[10px] mt-0.5 font-medium">Home</span>
+ 
+    <!-- ── MOBILE BOTTOM NAV ── -->
+    <nav class="fixed bottom-0 left-0 right-0 z-50 flex lg:hidden mobile-nav">
+      <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }"
+         routerLinkActive="mobile-active" class="mobile-tab">
+        <fa-icon [icon]="faHome" style="font-size:18px;"></fa-icon>
+        <span>Home</span>
       </a>
-
-      <!-- Profile -->
-      <!-- <a routerLink="/about" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-primary"
-        class="flex flex-col items-center justify-center flex-1 py-2 text-gray-500 hover:text-primary transition-all">
-        <fa-icon [icon]="faUser" class="text-lg"></fa-icon>
-        <span class="text-[10px] mt-0.5 font-medium">Profile</span>
-      </a> -->
-
-      <!-- Our Range -->
-      <a routerLink="/false-flooring" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-primary"
-        class="flex flex-col items-center justify-center flex-1 py-2 text-gray-500 hover:text-primary transition-all">
-        <fa-icon [icon]="faTh" class="text-lg"></fa-icon>
-        <span class="text-[10px] mt-0.5 font-medium">Our Range</span>
+      <a routerLink="/false-flooring" [routerLinkActiveOptions]="{ exact: true }"
+         routerLinkActive="mobile-active" class="mobile-tab">
+        <fa-icon [icon]="faTh" style="font-size:18px;"></fa-icon>
+        <span>Our Range</span>
       </a>
-
-      <!-- Contact Us -->
-      <a routerLink="/enquiry-cart" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-primary"
-        class="flex flex-col items-center justify-center flex-1 py-2 text-gray-500 hover:text-primary transition-all">
-        <fa-icon [icon]="faEnvelope" class="text-lg"></fa-icon>
-        <span class="text-[10px] mt-0.5 font-medium">Contact Us</span>
+      <a routerLink="/enquiry-cart" [routerLinkActiveOptions]="{ exact: true }"
+         routerLinkActive="mobile-active" class="mobile-tab" style="position:relative;">
+        <fa-icon [icon]="faEnvelope" style="font-size:18px;"></fa-icon>
+        <span>Contact</span>
         @if (cartItemQuantity() >= 1) {
-          <span class="absolute top-1.5 badge badge-warning badge-xs">{{ cartItemQuantity() }}</span>
+          <span class="badge badge-warning badge-xs"
+                style="position:absolute; top:6px; right:18px;">
+            {{ cartItemQuantity() }}
+          </span>
         }
       </a>
-
-      <!-- Call Us -->
-      <a href="tel:8669148239"
-        class="flex flex-col items-center justify-center flex-1 py-2 text-gray-500 hover:text-primary transition-all">
-        <fa-icon [icon]="faPhone" class="text-lg"></fa-icon>
-        <span class="text-[10px] mt-0.5 font-medium">Call Us</span>
+      <a href="tel:8669148239" class="mobile-tab">
+        <fa-icon [icon]="faPhone" style="font-size:18px;"></fa-icon>
+        <span>Call Us</span>
       </a>
-
     </nav>
-
-    <!-- Spacer: prevents content from hiding behind bottom nav on mobile -->
-    <div class="block lg:hidden h-16"></div>
+ 
+    <!-- Spacer: desktop = header height, mobile = header + bottom nav -->
+    <div class="hidden lg:block" style="height:119px;"></div>
+    <div class="block lg:hidden" style="height:135px;"></div>
   `,
   styles: `
-    /* Active state color for bottom nav icons */
-    nav a.text-primary fa-icon,
-    nav a.text-primary span {
-      color: inherit;
+    /* Nav links */
+    .nav-link {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 8px 18px;
+      border-radius: 6px;
+      transition: all 0.2s;
+      text-decoration: none;
+      white-space: nowrap;
     }
+    .nav-link:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,0.12);
+    }
+    .nav-link.nav-active {
+      background: var(--gold) !important;
+      color: var(--navy) !important;
+      font-weight: 700;
+    }
+ 
+    /* Call button */
+    .call-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      border-radius: 7px;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .call-btn:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+ 
+    /* Range links */
+    .range-link {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 5px;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .range-link:hover {
+      color: var(--gold);
+      background: rgba(201,168,76,0.1);
+    }
+    .range-link.range-active {
+      color: var(--gold) !important;
+      font-weight: 700;
+      background: rgba(201,168,76,0.12);
+    }
+ 
+    /* Search */
+    .search-box {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      padding: 5px 12px;
+      min-width: 200px;
+    }
+    .search-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 0.75rem;
+      width: 100%;
+    }
+    .search-input::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+ 
+    /* Mobile nav */
+    .mobile-nav {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 -2px 16px rgba(0,0,0,0.3);
+    }
+    .mobile-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      padding: 10px 4px 8px;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+      gap: 3px;
+    }
+    .mobile-tab span {
+      font-size: 10px;
+      font-weight: 500;
+    }
+    .mobile-tab:hover { color: var(--gold); }
+    .mobile-tab.mobile-active { color: var(--gold) !important; }
   `,
 })
 export class HeaderComponent {
   private readonly shoppingCartLocalStorageService = inject(ShoppingCartLocalStorageService);
-
+ 
   faPhone = faPhone;
   faEnvelope = faEnvelope;
   faMapMarkerAlt = faMapMarkerAlt;
@@ -175,6 +265,6 @@ export class HeaderComponent {
   faHome = faHome;
   faUser = faUser;
   faTh = faTh;
-
+ 
   cartItemQuantity = computed(() => this.shoppingCartLocalStorageService.cartItemQuantity());
 }

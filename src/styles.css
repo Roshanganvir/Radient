@@ -1,11 +1,192 @@
-/* You can add global styles to this file, and also import other style files */
+/* styles.scss */
 @import "tailwindcss";
+
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark;
+  themes: radiant --default;
+}
+
+@plugin "daisyui/theme" {
+  name: "radiant";
+  default: true;
+
+  /* Base — Ivory backgrounds */
+  --color-base-100: #F5F0E8;
+  --color-base-200: #EAE5DC;
+  --color-base-300: #D6CFBF;
+  --color-base-content: #0D1B3E;
+
+  /* Primary = Navy */
+  --color-primary: #0D1B3E;
+  --color-primary-content: #F5F0E8;
+
+  /* Secondary = Mid Navy */
+  --color-secondary: #3A4A6B;
+  --color-secondary-content: #F5F0E8;
+
+  /* Accent = Gold */
+  --color-accent: #C9A84C;
+  --color-accent-content: #0D1B3E;
+
+  /* Neutral = Dark Navy */
+  --color-neutral: #162550;
+  --color-neutral-content: #F5F0E8;
+
+  /* Semantic */
+  --color-info: #378ADD;
+  --color-info-content: #ffffff;
+  --color-success: #1D9E75;
+  --color-success-content: #ffffff;
+  --color-warning: #C9A84C;
+  --color-warning-content: #0D1B3E;
+  --color-error: #E24B4A;
+  --color-error-content: #ffffff;
+
+  /* Border radius */
+  --rounded-box: 0.75rem;
+  --rounded-btn: 0.5rem;
+  --rounded-badge: 1rem;
+}
+
+/* Custom CSS variables for direct use in templates */
+:root {
+  --navy:       #0D1B3E;
+  --navy-mid:   #3A4A6B;
+  --navy-dark:  #162550;
+  --gold:       #C9A84C;
+  --gold-light: #E8D49A;
+  --ivory:      #F5F0E8;
+  --ivory-dark: #EAE5DC;
 }
 
 html,
 :root,
 body {
   height: 100%;
+}
+
+/* ─── Navbar ─────────────────────────────────────── */
+.navbar {
+  background-color: var(--navy);
+  color: var(--ivory);
+  border-bottom: 2px solid var(--gold);
+}
+
+.navbar .brand,
+.navbar-brand {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.navbar a {
+  color: var(--ivory);
+  opacity: 0.85;
+  transition: color 0.2s, opacity 0.2s;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: var(--gold);
+  opacity: 1;
+}
+
+/* ─── Sub-navigation (product categories) ────────── */
+.sub-navbar {
+  background-color: var(--navy-dark);
+  padding: 0 1.5rem;
+}
+
+.sub-navbar .tab:hover,
+.sub-navbar .tab.tab-active {
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+
+/* ─── Product cards ───────────────────────────────── */
+.card {
+  background-color: #ffffff;
+  border: 1px solid var(--ivory-dark);
+}
+
+.card .card-category {
+  color: var(--gold);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.card .card-title {
+  color: var(--navy);
+}
+
+.card .price {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.card .btn-card {
+  background: var(--navy);
+  color: var(--gold);
+  border: none;
+  width: 100%;
+}
+
+.card .btn-card:hover {
+  background: var(--navy-mid);
+}
+
+/* ─── Buttons ─────────────────────────────────────── */
+/* btn-primary  → Navy bg, Ivory text  (use for main actions)  */
+/* btn-accent   → Gold bg, Navy text   (use for CTA / quotes)  */
+/* btn-outline  → Transparent + border (use for secondary)     */
+
+/* ─── Badges ──────────────────────────────────────── */
+/* badge-accent  → Gold bg, Navy text  */
+/* badge-primary → Navy bg, Ivory text */
+
+/* ─── Page background ─────────────────────────────── */
+/* Use bg-base-100 (Ivory) on <main> or page wrappers */
+
+/* ─── Footer ──────────────────────────────────────── */
+.footer {
+  background-color: var(--navy);
+  color: var(--ivory);
+}
+
+.footer a {
+  color: var(--gold-light);
+}
+
+.footer a:hover {
+  color: var(--gold);
+}
+
+/* ─── Divider / separator ─────────────────────────── */
+.divider::before,
+.divider::after {
+  background-color: var(--ivory-dark);
+}
+
+/* ─── Form inputs ─────────────────────────────────── */
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: var(--gold);
+  outline-color: var(--gold);
+}
+
+/* ─── Hero section ────────────────────────────────── */
+.hero-navy {
+  background-color: var(--navy);
+  color: var(--ivory);
+}
+
+.hero-navy h1,
+.hero-navy h2 {
+  color: #ffffff;
+}
+
+.hero-navy .highlight {
+  color: var(--gold);
 }
